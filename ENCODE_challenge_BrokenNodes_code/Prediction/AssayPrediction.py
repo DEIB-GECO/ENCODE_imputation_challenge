@@ -77,7 +77,7 @@ def main():
     Test_label = Test[["Cell_ID", "Mark_ID"]]
     Test_label_ord = []
     for index, row in Test_label.iterrows():
-        Test_label_ord.append((str(row['Cell_ID']) + str(row['Mark_ID'])))
+        Test_label_ord.append((str(row['Cell_ID']) + str(row['Mark_ID'])+'.npy'))
 
     with open('validation_labels', 'rb') as fp:
         val_labels = pickle.load(fp)
@@ -85,7 +85,7 @@ def main():
     with open('signals', 'rb') as fp:
         ordered_dir = pickle.load(fp)
 
-    new_dirs = sorted(ordered_dir + val_labels)
+    new_dirs = sorted(ordered_dir + val_labels+Test_label_ord)
     cells_simil = pd.read_csv('outCxC.csv', index_col=0)
     computePrediction(Test_label_ord, cells_simil,new_dirs,basepath,args['outputPATH'])
 

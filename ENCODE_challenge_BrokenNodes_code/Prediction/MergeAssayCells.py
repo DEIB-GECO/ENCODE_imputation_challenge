@@ -49,21 +49,14 @@ def computePrediction(d_a, a_s, d_c , c_s,basepath_assays,basepath_cells,out):
         ratio_val = 0.2
         alpha = getParameter(current_assay, current_cell, a_s, c_s, ratio_val)
         prediction = assay_signal*alpha + cell_signal*(1-alpha)
-        np.save(os.path.join(out+"/", str(d_a[i])), prediction)
+        np.save(os.path.join(out+"/", str(d_a[i])), np.sinh(prediction))
         end_time = time.time() - start_time
         print(str(d_a[i]) + " predicted in " + str(end_time))
 
 
 
-with open('validation_labels', 'rb') as fp:
-    val_labels = pickle.load(fp)
-
 with open('signals', 'rb') as fp:
-    ordered_dir = pickle.load(fp)
-
-new_dirs = sorted(ordered_dir + val_labels)
-
-training_dirs = new_dirs
+    training_dirs = pickle.load(fp)
 
 
 
