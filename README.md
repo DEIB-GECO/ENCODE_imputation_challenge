@@ -1,15 +1,12 @@
 # ENCODE_imputation_challenge
 
-The code necessary to perform our best technique \textbf{BrokenNodes\_v3} is available in the GitHub repository at \url{https://github.com/DEIB-GECO/ENCODE_imputation_challenge}.
-If you are willing to reproduce \textbf{BrokenNodes\_v2} imputation, it is sufficient to change the input tracks to just signals coming from training (T) and validation (V).
-To reproduce the \textbf{BrokenNodes} imputation it is necessary to change the input (always just training (T) and validation (V) tracks) and transform directly the assay based predictions with the $\sinh$ function.
+This code is necessary to reproduce the BrokenNodes_v3 predictions of the Encode Imputation challenge.
+If you are willing to reproduce BrokenNodes_v2 imputation, it is sufficient to change the input tracks to just signals coming from training (T) and validation (V).
+To reproduce the BrokenNodes imputation it is necessary to change the input (always just training (T) and validation (V) tracks) and transform directly the assay based predictions with the sinh function.
 
-
-\subsubsection{Training code}
-
-The \emph{training} part of the code is available in GitHub at \url{https://github.com/DEIB-GECO/ENCODE_imputation_challenge/tree/master/ENCODE_challenge_BrokenNodes_code/Training}.
-We used it to pre-process the necessary input tracks starting from the \textit{.bigWig} files, down-sampling the tracks at 25 bp resolution and transforming them with the $\sinh^{-1}$ function.
-During the training part, since the model is based on KNN, we compute the correlation between different cells and different assays as explained in section \ref{sec:data} (it is important to specify that the correlation is computed starting from the down-sampled \textit{.numpy} tracks that are not transformed with the $\sinh^{-1}$ function).
+## Training code
+We used it to pre-process the necessary input tracks starting from the .bigWig files, down-sampling the tracks at 25 bp resolution and transforming them with the sinh^-1 function.
+During the training part, since the model is based on KNN, we compute the correlation between different cells and different assays as explained in section \ref{sec:data} (it is important to specify that the correlation is computed starting from the down-sampled .numpy tracks that are not transformed with the sinh^-1 function).
 
 \begin{itemize}
     \item {\fontfamily{qcr}\selectfont Pre-processing.py inputPATH outputPATH sinhPATH}: takes the {\fontfamily{qcr}\selectfont inputPATH} of the folder were the \textit{.bigWig} tracks are stored, the {\fontfamily{qcr}\selectfont outputPATH} were to store the \textit{.numpy} down-sampled at 25 bp tracks, and the {\fontfamily{qcr}\selectfont sinhPATH} were to store the \textit{.numpy} down-sampled at 25 bp tracks transformed with $\sinh^{-1}$.
